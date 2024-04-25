@@ -1,20 +1,44 @@
-{% extends "base.html" %} {% block title %} Home {% endblock title %}
+{% extends "base.html" %} 
+{% block title %} Home {% endblock title %}
 {% block main_content %}
-  <h4>Crypto price data into CSV</h4>
-  <form action="" method="post">
-    <label for="symbol">Symbol: </label>
-    <input type="text" name="symbol" id="symbol"> tBTCUSD - tETHUSD<br><br>
+  <div class="container">
+    <h4 class="mt-4">Crypto price data into CSV</h4>
+    <form action="" method="post" class="mt-4">
 
+      <div class="form-group">
+        <label for="symbol">Symbol: </label>
+        <input type="text" name="symbol" id="symbol" list="symbols" class="form-control">
+        <datalist id="symbols">
+          <option value="tBTCUSD"></option>
+          <option value="tETHUSD"></option>
+          <option value="tDOGE:USD"></option>
+        </datalist>
+      </div><br>
 
-    <label for="startdate">Start Date: </label>
-    <input type="date" name="startdate" id="startdate">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="startdate">Start Date: </label>
+          <input type="date" name="startdate" id="startdate" class="form-control">
+        </div><br>
+        <div class="form-group col-md-6">
+          <label for="enddate" id="enddate_lable">End Date: </label>
+          <input type="date" name="enddate" id="enddate" class="form-control">
+        </div>
+      </div><br>
 
-    <label for="enddate">End Date: </label>
-    <input type="date" name="enddate" id="enddate"><br><br>
+      <div class="form-group">
+        <label for="timeframe">Time Frame:</label>
+        <input list="timeframes" type="text" name="timeframe" id="timeframe" class="form-control">
+        <datalist id="timeframes">
+          <option value="1m"></option>
+          <option value="30m"></option>
+          <option value="1h"></option>
+          <option value="1d"></option>
+        </datalist>
+      </div><br>
 
-    <label for="timeframe">Time Frame: 1m - 1h - 1d </label>
-    <input type="text" name="timeframe" id="timeframe"><br><br>
+      <button type="submit" class="btn btn-primary">Submit</button>
 
-    <button type="submit">submit</button>
-  </form>
-{% endblock main_content %}<h1>Hello</h1>
+    </form>
+  </div>
+{% endblock main_content %}
