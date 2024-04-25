@@ -5,7 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from bitfinex_api import get_bitfinex_price_data
 
 templates = Jinja2Templates(directory="../templates")
-app = FastAPI(debug=True)
+app = FastAPI()
+app.mount("/statics", StaticFiles(directory="../statics"), name="index")
 
 @app.get('/')
 def home(request: Request):
