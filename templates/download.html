@@ -1,10 +1,11 @@
-{% extends "base.html" %}{% block title %} Downlaod {% endblock title %}{% block
-main_content %} 
-<h4>output</h4>
-{% for line in data_csv %}
-<h6>{{ line }}</h6>
-{% endfor %}
-<div>
-    <h5>{{ data }}</h5>
-</div>
+
+{% extends "base.html" %}
+{% block title %}
+  Download
+{% endblock title %}
+{% block main_content %}
+  <form action="/download" method="post"> <!-- Modified action to point to the /download endpoint -->
+    <button id="export_csv" name="action" value="download_csv" type="submit">Download CSV</button> <!-- Added name="action" and value="download_csv" -->
+    <button id="show_name" name="action" value="show_name" type="submit">Show Name</button> <!-- Added name="action" and value="show_name" -->
+  </form>
 {% endblock main_content %}

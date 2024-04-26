@@ -1,44 +1,69 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+
 {% block title %} Home {% endblock title %}
+
+{% block message %}
+<h6 style="color: rgb(214, 67, 67);">{{ error }}</h6>
+{% endblock message %}
+
 {% block main_content %}
-  <div class="container">
-    <h4 class="mt-4">Crypto price data into CSV</h4>
-    <form action="" method="post" class="mt-4">
+<div class="container" style="color: rebeccapurple;">
+  <h4 class="mt-4">Crypto price data into CSV</h4>
+  <form action="" method="post" class="mt-4">
+    <div class="form-group">
+      <label for="symbol">Symbol: </label>
+      <input
+        type="text"
+        name="symbol"
+        id="symbol"
+        list="symbols"
+        class="form-control"
+        required
+      />
+      <datalist id="symbols">
+        <option value="BTCUSD"></option>
+        <option value="ETHUSD"></option>
+        <option value="DOGE:USD"></option>
+      </datalist>
+    </div>
 
-      <div class="form-group">
-        <label for="symbol">Symbol: </label>
-        <input type="text" name="symbol" id="symbol" list="symbols" class="form-control">
-        <datalist id="symbols">
-          <option value="tBTCUSD"></option>
-          <option value="tETHUSD"></option>
-          <option value="tDOGE:USD"></option>
-        </datalist>
-      </div><br>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="startdate">Start Date: </label>
+        <input
+          type="date"
+          name="startdate"
+          id="startdate"
+          class="form-control"
+          required
+        />
+      </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="startdate">Start Date: </label>
-          <input type="date" name="startdate" id="startdate" class="form-control">
-        </div><br>
-        <div class="form-group col-md-6">
-          <label for="enddate" id="enddate_lable">End Date: </label>
-          <input type="date" name="enddate" id="enddate" class="form-control">
-        </div>
-      </div><br>
+      <div class="form-group col-md-6">
+        <label for="enddate" id="enddate_lable">End Date: </label>
+        <input type="date" name="enddate" id="enddate" class="form-control" />
+      </div>
+    </div>
 
-      <div class="form-group">
-        <label for="timeframe">Time Frame:</label>
-        <input list="timeframes" type="text" name="timeframe" id="timeframe" class="form-control">
-        <datalist id="timeframes">
-          <option value="1m"></option>
-          <option value="30m"></option>
-          <option value="1h"></option>
-          <option value="1d"></option>
-        </datalist>
-      </div><br>
+    <div class="form-group">
+      <label for="timeframe">Time Frame:</label>
+      <input
+        list="timeframes"
+        type="text"
+        name="timeframe"
+        id="timeframe"
+        class="form-control"
+        required
+      />
+      <datalist id="timeframes">
+        <option value="1m"></option>
+        <option value="30m"></option>
+        <option value="1h"></option>
+        <option value="1d"></option>
+      </datalist>
+    </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-
-    </form>
-  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 {% endblock main_content %}
