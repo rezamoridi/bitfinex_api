@@ -1,15 +1,15 @@
 {% extends "base.html" %}{% block title %} Downlaod {% endblock title %}{% block
-main_content %} 
+main_content %}
 <a href="/"><button class="btn-primary">Home</button></a>
 <form action="#" method="post">
-    <button id="export-csv">csv</button>
+  <button id="export-csv">csv</button>
 </form>
-<h4>output</h4>
+<h4 style="color: aquamarine;">output</h4>
 {% for line in data_list %}
-<h6 class="loso">{{ line }}</h6>
+<h6 style="color: blueviolet;">{{ line }}</h6>
 {% endfor %}
 <div>
-    <h5>{{ data }}</h5>
+  <h5>{{ data }}</h5>
 </div>
 
 {% endblock main_content %}
