@@ -8,12 +8,13 @@
     $pip install requirement.txt
 
 </div>
-<h3>Run:</h3>
+<h3>Change directory to project/finex:</h3>
 <div>
 
     cd finex
 
 </div>
+<h3>Run uvicorn server: </h3>
 <div>
     $uvicorn main:app --reload
 </div>
