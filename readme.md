@@ -5,13 +5,15 @@
 <h3>Setup:</h3>
 <div>
 
-    <li>1.$pip install requirement.txt</li><br><br>
+    $pip install requirement.txt
 
 </div>
 <h3>Run:</h3>
 <div>
 
-    1.open finex directory</li>
-    2. Run : $uvicorn main:app --reload</li>
-    
+    cd finex
+
+</div>
+<div>
+    $uvicorn main:app --reload
 </div>
