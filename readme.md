@@ -16,5 +16,7 @@
 </div>
 <h3>Run uvicorn server: </h3>
 <div>
+
     $uvicorn main:app --reload
+    
 </div>
