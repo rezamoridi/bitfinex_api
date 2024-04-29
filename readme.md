@@ -5,7 +5,7 @@
 <h3>Setup:</h3>
 <div>
 
-    $pip install requirement.txt
+    pip install requirement.txt
 
 </div>
 <h3>Change directory to project/finex:</h3>
@@ -18,5 +18,5 @@
 <div>
 
     $uvicorn main:app --reload
-    
+
 </div>
