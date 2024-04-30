@@ -40,6 +40,25 @@ def get_bitfinex_price_data(symbol, start_date, end_date, timeframe):
     return None
 
 
+def get_bitfinex_api_ticker(symbol, sleep):
+    url = f"https://api-pub.bitfinex.com/v2/ticker/{symbol}"
+    
+    delay = 2
+
+    response = requests.get(url=url)
+
+    while(True):
+        time.sleep(sleep)
+        if response:
+            return response.json()
+        elif response.status_code == 429:
+            print(f"Rate limit exceeded. Retry attempt in {delay} seconds.")
+            time.sleep(delay)
+            delay *= 2
+        else:
+            print("Error", response.status_code)
+            return None
+
 # Usage  
 
 '''request = get_bitfinex_price_data(symbol='tBTCUSD', start_date='2024-04-20', end_date='2024-04-23', timeframe='1m')
@@ -54,3 +73,7 @@ else:
 
 '''a =get_bitfinex_price_data("tBTCUSD","2024-04-01", "2024-04-04", "1h")
 print(a)'''
+
+"""while(True):
+    print(get_bitfinex_api_ticker("tBTCUSD",0))"""
+    
