@@ -75,7 +75,7 @@ def convert_timesnap(timesnap):
 
 headers = ["BID", "BID_SIZE", "ASK", "ASK_SIZE", "DAILY_CHANGE", "DAILY_CHANGE_PERCENT", "LAST_PRICE", "VOLUME", "HIGH", "LOW", "TIMESTAMP", "TIMESTAMP_CONVERTED"]
 
-with open(file=f"my_csv", mode="a") as f:
+with open(file=f"second_csv.csv", mode="a") as f:
     f.write(','.join(headers) + '\n') 
 
 while True:
