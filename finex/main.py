@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from bitfinex_api import get_bitfinex_price_data
+from bitfinex_api import get_bitfinex_price_data, get_bitfinex_api_ticker
 from write_csv import save_to_csv as w_csv
 from models import Data
 
@@ -15,8 +15,14 @@ app.mount("/statics", StaticFiles(directory="../statics"), name="index")
 
 
 @app.get('/')
-def home(request: Request):
-    return templates.TemplateResponse(name="home.html", request=request)
+def home(request: Request, symbol: str = "tBTCUSD"):
+    ticker = get_bitfinex_api_ticker(symbol=symbol, sleep=0)
+    return templates.TemplateResponse(name="home.html", request=request, context={"ticker": ticker})
+
+@app.get('/ticker')
+def bitfinex_ticker(symbol: str = "tBTCUSD"):
+    data = get_bitfinex_api_ticker(symbol=symbol, sleep=3)
+    return data
 
 @app.post('/')
 def home_form(request: Request, symbol: str = Form(...), startdate = Form(...), enddate = Form(...) ,timeframe: str = Form(...)):
