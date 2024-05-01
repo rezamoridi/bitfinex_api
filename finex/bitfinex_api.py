@@ -41,13 +41,15 @@ def get_bitfinex_price_data(symbol, start_date, end_date, timeframe):
     print("Failed after multiple retry attempts.")
     return None
 
+# Usage
+"""data get_bitfinex_price_data(symbol="tBTCUSD", start_date="2024-04-01", end_date="2024-04-30", timeframe="1D" )
+print(data)"""
 
 
 
+# Ticker 
 def get_bitfinex_api_ticker(symbol, delay = 0, channel_time = None): # Delay for preventing rate limit 
-
     
-
     def fetch_data():
         url = f"https://api-pub.bitfinex.com/v2/ticker/{symbol}"
         response = requests.get(url=url)
@@ -60,41 +62,22 @@ def get_bitfinex_api_ticker(symbol, delay = 0, channel_time = None): # Delay for
                 print(f"Rate limit exceeded, Retry in {delay} seconds")
             else:  
                 return response
+        
 
-    
-    if channel_time:    # Channel will hold data for channel_time duration and convert to csv
+    if channel_time:
         data = []
-        start_date = time.time()
-        end_date = time.time() + channel_time
-        while time.time() - 1 < end_date:
-            data.append(fetch_data())
-        print(f"csv created! - {convert_timesnap(time.time())}")
-        return save_to_csv_beta(data_list=data, filename=f"{symbol} - {convert_timesnap(start_date)} - {convert_timesnap(end_date)}.csv")
+        end_time = time.time() + channel_time
+        while time.time() <= end_time:
+            data += [fetch_data()]
+        return data
     else:
-        return(fetch_data())
+        return fetch_data()
 
-    
-
-    
-
-
-
-
-# ticker usage
-
-"""request = get_bitfinex_api_ticker("tBTCUSD",channel_time=5)"""
+# Usage
+"""ticks = get_bitfinex_api_ticker(symbol="tBTCUSD", delay=0, channel_time=10)  # Delay: retry after ratelimit - Channel_time: recording duration
+print(ticks)"""
 
 
 
-# candle Usage  
-
-'''request = get_bitfinex_price_data(symbol='tBTCUSD', start_date='2024-04-20', end_date='2024-04-23', timeframe='1m')
-""" timeframe : 1m, 30m ,1h, 1D ..."""
-
-if request:
-    save_to_csv(data=request, filename="bitfinex_btc_price.csv")
-    print("Success")
-else:
-    print("Faild to save data")'''
 
     
