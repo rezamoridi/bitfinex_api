@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, field_validator, ValidationError
-from tools.symbols import symbols
 from datetime import datetime
+
+symbols = open(file="../csv/symbols_csv/symbolcsv.csv", mode="r").read()
 
 """planting Models""" 
 
