@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
 from bitfinex_api import get_bitfinex_price_data, get_bitfinex_api_ticker
-from write_csv import save_to_csv as w_csv
+from tools.write_csv import save_to_csv as w_csv
 from models import Data
 
 templates = Jinja2Templates(directory="../templates")
