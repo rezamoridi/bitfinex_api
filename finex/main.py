@@ -1,29 +1,41 @@
+"""Imports
+"""
 from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import ValidationError
+import time
 
 from bitfinex_api import get_bitfinex_price_data, get_bitfinex_api_ticker
 from tools.write_csv import save_to_csv as w_csv
+from tools.write_csv import save_to_csv_beta
+from tools.time_convert import convert_timesnap
 from models import Data
 
+"""Globals
+"""
 templates = Jinja2Templates(directory="../templates")
 app = FastAPI()
 app.mount("/statics", StaticFiles(directory="../statics"), name="index")
 
 
-
+"""EndPoints
+"""
+# Root
 @app.get('/')
-def home(request: Request, symbol: str = "tBTCUSD"):
-    ticker = get_bitfinex_api_ticker(symbol=symbol, sleep=0)
-    return templates.TemplateResponse(name="home.html", request=request, context={"ticker": ticker})
+def root(request : Request):
+    return templates.TemplateResponse(name="home.html", request=request)
 
-@app.get('/ticker')
-def bitfinex_ticker(symbol: str = "tBTCUSD"):
-    data = get_bitfinex_api_ticker(symbol=symbol, sleep=3)
-    return data
+#Home
+@app.get('/{view}')
+def home(request: Request, view : str):
+    if view == 'ticker':
+        return templates.TemplateResponse(name="ticker_home.html", request=request)
+    else:
+        return templates.TemplateResponse(name="home.html", request=request)
 
+#Home Form
 @app.post('/')
 def home_form(request: Request, symbol: str = Form(...), startdate = Form(...), enddate = Form(...) ,timeframe: str = Form(...)):
     try:   
@@ -38,10 +50,23 @@ def home_form(request: Request, symbol: str = Form(...), startdate = Form(...), 
         return templates.TemplateResponse(name="home.html", request=request, context={"error": e.errors()[0]["msg"]}) 
     
 
+# Ticker Form
+@app.post('/ticker')
+def ticker_download(request: Request, symbol: str = Form(...), channel_time: int = Form(...)):
+    try:
+        ticks = get_bitfinex_api_ticker(symbol=f"t{symbol}", channel_time=channel_time)
+        save_to_csv_beta(ticks, f"../csv/ticker_csv/{symbol} - {convert_timesnap(time.time())}")
+        return templates.TemplateResponse(name="dl_success.html", request=request)
+    except Exception:
+        raise HTTPException(status_code=500, detail="Error")
+
     
+
+
+# Candle csv download
 @app.post('/download_csv')
 def download(request: Request):
-    w_csv(data_list, f"../csv/{data.symbol}-{data.start_date}-{data.end_date}-{data.time_frame}.csv")
+    w_csv(data_list, f"../csv/candle_csv/{data.symbol}-{data.start_date}-{data.end_date}-{data.time_frame}.csv")
     
-    return templates.TemplateResponse(name="download.html", request=request)
+    return templates.TemplateResponse(name="dl_success.html", request=request)
     
