@@ -4,7 +4,7 @@ from datetime import datetime
 from .time_convert import convert_timesnap 
 
 def save_to_csv(data, filename):
-    with open(filename, 'w', newline='') as csvfile:
+    with open(filename, '+w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Timestamp", "Open", "High", "Low", "Close", "Volume"])
         for candle in data:
@@ -19,7 +19,7 @@ def save_to_csv(data, filename):
 
 def save_to_csv_beta(data_list, filename):
     headers = ["BID", "BID_SIZE", "ASK", "ASK_SIZE", "DAILY_CHANGE", "DAILY_CHANGE_PERCENT", "LAST_PRICE", "VOLUME", "HIGH", "LOW", "TIMESTAMP"]
-    with open(file=f"csv/ticker_csv/{filename}", mode="a") as csvfile:
+    with open(file=f"{filename}.csv", mode="+w") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(headers)
         for record in data_list:
