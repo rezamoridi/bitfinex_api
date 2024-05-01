@@ -2,53 +2,9 @@
 message %}
 <h6 style="color: rgb(214, 67, 67)">{{ error }}</h6>
 {% endblock message %} {% block main_content %}
-<style>
-  /* Custom CSS */
-  #tickerBox {
-    width: 100px; /* Set width and height for circular shape */
-    height: 100px;
-    border-radius: 50%; /* Make it circular */
-    padding: 10px;
-    background-color: #f8f9fa; /* Bootstrap background color for light mode */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add some shadow for depth */
-    position: relative; /* Position relative for absolute positioning of BTC logo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  #tickerValue {
-    text-shadow: 10px;
-    color: black;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  #btcLogo {
-    position: absolute; /* Position the BTC logo inside the box */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Center the logo precisely */
-    width: 98%; /* Adjust size of the BTC logo */
-    height: auto;
-    opacity: 45%;
-  }
-
-
-</style>
-
-<div class="container mt-5">
-  <h1 class="text-center">Live Ticker</h1>
-  <div id="tickerBox" class="text-center">
-    <div id="tickerValue">{{ ticker[0] }}</div>
-    <img
-      id="btcLogo"
-      src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg"
-      alt="BTC Logo"
-    />
-  </div>
 </div>
-<div class="container" style="color: rebeccapurple">
+<div class="container" style="color: rgb(28, 25, 31)">
   <h4 class="mt-4">Crypto price data into CSV</h4>
   <form action="" method="post" class="mt-4">
     <div class="form-group">
@@ -112,22 +68,4 @@ message %}
   </form>
   <br />
 </div>
-<script>
-  function updateTicker() {
-    // Make a request to fetch the updated ticker value
-    fetch("/ticker")
-      .then((response) => response.json())
-      .then((data) => {
-        // Update the ticker value
-        document.getElementById("tickerValue").innerText = data[0];
-      })
-      .catch((error) => console.error("Error updating ticker:", error));
-  }
-
-  // Update the ticker every 5 seconds
-  setInterval(updateTicker, 1000);
-
-  // Initial update
-  updateTicker();
-</script>
 {% endblock main_content %}
