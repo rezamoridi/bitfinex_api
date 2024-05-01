@@ -1,5 +1,32 @@
 .body-ground {
-    background-color: rgb(2, 2, 30);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(30deg, 
+        rgba(195, 247, 58, 0.8), 
+        rgba(149, 224, 108, 0.7),
+        rgba(104, 182, 132, 0.7), 
+        rgba(9, 77, 146, 0.5), 
+        rgba(28, 16, 24, 0.8), 
+        rgba(9, 77, 146, 0.5), 
+        rgba(28, 16, 24, 0.5), 
+        rgba(104, 182, 132, 0.7),
+        rgba(149, 224, 108, 0.7) 
+    ); 
+    background-size: 200% 100%; 
+    animation: fan 8s linear infinite alternate; 
+    backdrop-filter: blur(120px); 
+}
+
+.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+    opacity: 70%;
 }
 
 
+@keyframes fan {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
