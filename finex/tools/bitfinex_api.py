@@ -1,11 +1,10 @@
 import requests
 from datetime import datetime, timedelta
 import time
-from tools.time_convert import convert_timesnap
-from tools.write_csv import save_to_csv_beta
+from .time_convert import convert_timesnap
 
 
-def get_bitfinex_price_data(symbol, start_date, end_date, timeframe):
+def get_bitfinex_price_data_candle(symbol, start_date, end_date, timeframe):
     # Convert dates to Unix timestamps
     start_timestamp = int(datetime.strptime(start_date, '%Y-%m-%d').timestamp() * 1000)
     end_timestamp = int((datetime.strptime(end_date, '%Y-%m-%d') + timedelta(days=1)).timestamp() * 1000)
@@ -42,8 +41,8 @@ def get_bitfinex_price_data(symbol, start_date, end_date, timeframe):
     return None
 
 # Usage
-"""data get_bitfinex_price_data(symbol="tBTCUSD", start_date="2024-04-01", end_date="2024-04-30", timeframe="1D" )
-print(data)"""
+data =  get_bitfinex_price_data_candle(symbol="tBTCUSD", start_date="2024-04-01", end_date="2024-04-30", timeframe="1D" )
+print(data)
 
 
 

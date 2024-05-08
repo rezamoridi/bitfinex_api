@@ -1,8 +1,8 @@
 from pydantic import BaseModel, Field, field_validator, ValidationError
 from datetime import datetime
 
-symbols = open(file="../csv/symbols_csv/symbolcsv.csv", mode="r").read()
-
+"""symbols = open(file="csv/symbols_csv/symbolcsv.csv", mode="r").read()
+"""
 """planting Models""" 
 
 class Data(BaseModel):
@@ -14,7 +14,7 @@ class Data(BaseModel):
     @field_validator("symbol")
     @classmethod
     def symbol_validator(cls, v):
-        if v not in symbols:
+        if v not in ['BTCUSD']:
             raise ValueError("symbol not found")
         return v
     

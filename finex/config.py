@@ -1,4 +1,6 @@
-import uvicorn
+from fastapi import FastAPI, APIRouter
+from routers import candle, ticker
 
-if __name__ == "__main__":
-    uvicorn.run("main", reload=True)
+app = FastAPI()
+
+app.include_router(candle.router, tags=['Candle'])
