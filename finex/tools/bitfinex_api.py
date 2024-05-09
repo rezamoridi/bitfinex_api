@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 import time
-from .time_convert import convert_timesnap
+from .time_convert import convert_timesnap, convert_timesnap_time
 
 
 def get_bitfinex_price_data_candle(symbol, start_date, end_date, timeframe):
@@ -41,8 +41,8 @@ def get_bitfinex_price_data_candle(symbol, start_date, end_date, timeframe):
     return None
 
 # Usage
-data =  get_bitfinex_price_data_candle(symbol="tBTCUSD", start_date="2024-04-01", end_date="2024-04-30", timeframe="1D" )
-print(data)
+"""data =  get_bitfinex_price_data_candle(symbol="tBTCUSD", start_date="2024-04-01", end_date="2024-04-30", timeframe="1D" )
+print(data)"""
 
 
 
@@ -55,7 +55,7 @@ def get_bitfinex_api_ticker(symbol, delay = 0, channel_time = None): # Delay for
 
         if response:
             if response.status_code == 200:
-                data = response.json() + [convert_timesnap(time.time())]
+                data = response.json() + [convert_timesnap_time(time.time())]
                 return data
             if response.status_code == 429:
                 print(f"Rate limit exceeded, Retry in {delay} seconds")
