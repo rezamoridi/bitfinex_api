@@ -1,14 +1,15 @@
 import csv
 from datetime import datetime
+import time
 
 from .time_convert import convert_timesnap 
 
 def save_to_csv(data, filename):
-    with open(filename, '+w', newline='') as csvfile:
+    with open(f"{filename}.csv", '+w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Timestamp", "Open", "High", "Low", "Close", "Volume"])
         for candle in data:
-            timestamp = datetime.fromtimestamp(int(candle[0]) / 1000).strftime('%Y-%m-%d %H:%M:%S')
+            timestamp = int(time.time())
             open_price = candle[1]
             high_price = candle[3]
             low_price = candle[4]
