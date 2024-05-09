@@ -11,7 +11,7 @@ def canle(sy: str, sd: str, ed: str, tf: str, csv: bool):
         data = api.get_bitfinex_price_data_candle(symbol=sy, start_date=sd, end_date=ed, timeframe=tf)
 
         if csv:
-            csvtool.save_to_csv(data=data, filename=f"../csv/candle_csv/{sy}-{sd}-{ed}-{tf}.csv")
+            csvtool.save_to_csv(data=data, filename=f"{sy}-{sd}-{ed}-{tf}")
             return "CSV saved!"
         else:
             return data
